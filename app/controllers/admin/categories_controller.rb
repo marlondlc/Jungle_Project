@@ -10,7 +10,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.new
   end
     #this will redirect them to the views folder and allow them to use the instance variable within "category/New"
-
+    # this instance variable is needed by the form
 
   def create
     @category = Category.new(categories_params)
