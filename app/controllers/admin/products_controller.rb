@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  before_filter :authenticate
 
   def index
     @products = Product.order(id: :desc).all
@@ -37,5 +38,13 @@ class Admin::ProductsController < ApplicationController
       :price
     )
   end
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['ADMIN_USER_NAME'] && password == ENV['ADMIN_PASSWORD']
+      #this is securely storing the password/user in the env file (rails convention)
+    end
+  end
+
 
 end

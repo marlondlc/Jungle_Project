@@ -1,4 +1,5 @@
 class Admin::CategoriesController < ApplicationController
+  before_filter :authenticate
 
   def index
     @categories = Category.order(name: :desc).all
@@ -32,4 +33,10 @@ class Admin::CategoriesController < ApplicationController
     # The only thing you want to permit is them adding a new category so they only thing they should affect is  "NAME"
   end
 
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['ADMIN_USER_NAME'] && password == ENV['ADMIN_PASSWORD']
+      #this is securely storing the password/user in the env file (rails convention)
+    end
+  end
 end
