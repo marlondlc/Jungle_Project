@@ -4,9 +4,21 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi, <%=@order.email%></h1>
+    <h1>Thanks for supporting us, <%= @user %></h1>
+
     <p>
-      Thank you for your order.....need to add items from cart
+      Well listen if you are not satisfied with your order, well you're stuck with it. All
+      sales are final, no refunds.
+      Order Details:
+      <% @order.line_items.each do |line_item| %>
+        <%= render 'item', product_id: line_item.product_id, line_total: line_item.total_price, quantity: line_item.quantity  %>
+      <% end %>
+      Order total: <%= humanized_money_with_symbol @order.total %>
     </p>
+    <p>
+      If you've got more money for us please come back!  <%= @url %>.
+    </p>
+    <p>The Jungle Team thanks you for your support</p>
+
   </body>
 </html>
