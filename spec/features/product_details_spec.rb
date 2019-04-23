@@ -28,6 +28,7 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
   save_screenshot 'product_clicked.png'
 
   expect(current_path).to eq "/products/10"
+  #none of the below WORKS!!!!!
   #expect(page.current_path).to eq '/products/1'
   #expect(current_path).redirect_to "/projects/1"
   #expect(response).to redirect_to '/products/1'
